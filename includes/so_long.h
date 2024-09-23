@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/23 15:47:42 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:23:09 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ typedef enum e_nbr
 typedef struct s_game
 {
 	int		fd;
-	int		buffer;
+	int		width;
+	int		height;
 	void	*mlx;
 	void	*mlx_win;
-	char	*tmp;
+	char	*file;
 	char	**map;
 }	t_game;
 

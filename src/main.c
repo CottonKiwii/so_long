@@ -6,36 +6,49 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:46:53 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/23 15:55:44 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:48:01 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	find_len(t_game *game)
+void	find_height(t_game *game)
 {
-	int	fd;
+	int		fd;
+	char	*str;
+
+	fd = open(game->file, O_RDONLY);
+	if (fd == -1)
+		return ;
+	str = "";
+	while (str)
+	{
+		str = get_next_line(fd);
+		game->height++;
+		free(str);
+	}
+	close(fd);
 }
 
 int	valid_map(t_game *game)
 {
 	int	i;
-	int	len;
 
+	(void) game;
 	i = 0;
-	len = find_len(t_game *game);
 	return (TRUE);
 }
 
-int	find_buffer(t_game *game)
+int	find_map_size(t_game *game)
 {
 	char	*tmp;
 
 	tmp = get_next_line(game->fd);
 	if (!tmp)
 		return (ERR);
-	game->tmp = tmp;
-	game->buffer = ft_strlen(game->tmp);	
+	game->width = ft_strlen(tmp);	
+	game->height = 0;
+	find_height(game);
 	return (TRUE);
 }
 
@@ -48,15 +61,16 @@ int	valid_file(t_game *game, char *file)
 	game->fd = open(file, O_RDONLY);	
 	if (game->fd == -1)
 		return (perror("so_long"), ERR);
-	if (!find_buffer(game))
+	if (!find_map_size(game))
 		return (perror("so_long"), ERR);
 	return (TRUE);
 }
 
-void	struct_init(t_game *game)
+void	struct_init(t_game *game, char *file)
 {
 	game->fd = -1;
-	game->buffer = 0;
+	game->file = file;
+	game->width = 0;
 	game->map = NULL;
 }
 
@@ -66,12 +80,13 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_putstr_fd("so_long: invalid arguments\n", STDERR), ERR);
-	struct_init(&game);
+	struct_init(&game, av[1]);
 	if (!valid_file(&game, av[1]))
 		return (close(game.fd), ERR);
 	if (!valid_map(&game))		
 		return (close(game.fd), ERR);
-	ft_printf("%s", game.tmp);
+	ft_printf("Height is %d\n", game.height);
+	ft_printf("Width is %d\n", game.width);
 	game.mlx = mlx_init();
 	game.mlx_win = mlx_new_window(game.mlx, 300, 400, "so_long");
 }
