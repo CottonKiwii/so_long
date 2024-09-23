@@ -6,7 +6,7 @@
 #    By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 10:25:24 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/23 11:18:32 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/23 15:25:28 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,24 +48,30 @@ LIBFT := libft/libft.a
 all: ${NAME}
 
 ${NAME}: ${OBJS} ${LIBFT}
-	${CC} ${CFLAGS} ${MLXFLAGS} $^ ${INCLUDES} -o $@
-
+	@${CC} ${CFLAGS} ${MLXFLAGS} $^ ${INCLUDES} -o $@
+	@echo "${GREEN}--------------------------${DEFAULT}"
+	@echo "${GREEN}   COMPILATION COMPLETE   ${DEFAULT}"
+	@echo "${GREEN}--------------------------${DEFAULT}"
+	
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c | ${OBJS_SORT}
-	${CC} ${CFLAGS} -c $< ${INCLUDES} -o $@
+	@${CC} ${CFLAGS} -c $< ${INCLUDES} -o $@
 
 ${OBJS_SORT}:
-	mkdir -p $@
+	@mkdir -p $@
 
 ${LIBFT}:
-	${MAKE} -C ${LIBFT_DIR}
+	@${MAKE} -C ${LIBFT_DIR}
 
 clean:
-	${MAKE} $@ -C ${LIBFT_DIR}
-	${RM} ${OBJS_DIR}
+	@${MAKE} $@ -C ${LIBFT_DIR}
+	@${RM} ${OBJS_DIR}
+	@echo "${BLUE}--------------------------${DEFAULT}"
+	@echo "${BLUE}     CLEANUP COMPLETE     ${DEFAULT}"
+	@echo "${BLUE}--------------------------${DEFAULT}"
 
 fclean: clean
-	${MAKE} $@ -C ${LIBFT_DIR}
-	${RM} ${NAME}
+	@${MAKE} $@ -C ${LIBFT_DIR}
+	@${RM} ${NAME}
 
 re: fclean all
 

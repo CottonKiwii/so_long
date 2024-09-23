@@ -6,7 +6,7 @@
 #    By: CottonKiwii <julia.wolfram@gmx.at>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 18:21:08 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/20 16:38:23 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/23 15:26:28 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,21 +92,21 @@ INCLUDES := -I./includes
 all: ${NAME}
 
 ${NAME}: ${OBJS} 
-	${AR} ${NAME} ${OBJS} 
+	@${AR} ${NAME} ${OBJS} 
 
 ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c | ${OBJS_SORT}
-	${CC} ${CFLAGS} $< ${INCLUDES} -c -o $@
+	@${CC} ${CFLAGS} $< ${INCLUDES} -c -o $@
 
 ${OBJS_SORT}:
-	mkdir -p $@
+	@mkdir -p $@
 
 ### CLEANUP COMMANDS ###
 
 clean:
-	${RM} ${OBJS_DIR}
+	@${RM} ${OBJS_DIR}
 
 fclean: clean 
-	${RM} ${NAME}
+	@${RM} ${NAME}
 
 re: fclean all
 
