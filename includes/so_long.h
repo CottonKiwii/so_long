@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/23 17:23:09 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:52:26 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ typedef enum e_nbr
 	TRUE
 }	t_nbr;
 
+typedef enum e_err
+{
+	PERR,
+	MAPERR,
+	FILERR_1,
+	FILERR_2
+}	t_err;
+
 # define STDIN	STDIN_FILENO
 # define STDOUT	STDOUT_FILENO
 # define STDERR	STDERR_FILENO
@@ -41,5 +49,7 @@ typedef struct s_game
 	char	*file;
 	char	**map;
 }	t_game;
+
+void	parse_error(t_game *game, t_err status);
 
 #endif

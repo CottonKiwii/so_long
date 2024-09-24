@@ -6,7 +6,7 @@
 #    By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 10:25:24 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/23 15:25:28 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/24 15:56:27 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ DEFAULT := \033[0m
 SRCS_DIR := src
 
 SRCS := main \
+		exit \
 
 OBJS_DIR := obj
 

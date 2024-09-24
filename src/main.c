@@ -6,64 +6,80 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:46:53 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/23 17:48:01 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:53:55 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	find_height(t_game *game)
+int	map_init(t_game *game)
 {
-	int		fd;
-	char	*str;
+	char	*map;
+	int		bytes_read;
 
-	fd = open(game->file, O_RDONLY);
-	if (fd == -1)
-		return ;
-	str = "";
-	while (str)
-	{
-		str = get_next_line(fd);
-		game->height++;
-		free(str);
-	}
-	close(fd);
+	game->fd = open(game->file, O_RDONLY);	
+	if (game->fd == -1)
+		return (perror("so_long"), ERR);
+	map = (char *)ft_calloc(game->height + 1, sizeof(char));
+	if (!map)
+		return (close(game->fd), perror("whatever"), ERR);
+	bytes_read = 1;
+	bytes_read = read(game->fd, map, game->height);
+	if (bytes_read == -1)
+		return (perror("so_long"), ERR);
+	game->map = ft_split(map, '\n');
+	if (!game->map)
+		return (perror("so_long"), ERR);
+	return (TRUE);
 }
 
 int	valid_map(t_game *game)
 {
 	int	i;
 
+	map_init(game);
 	(void) game;
 	i = 0;
-	return (TRUE);
+	return (0);
 }
 
 int	find_map_size(t_game *game)
 {
-	char	*tmp;
+	int		bytes_read;
+	int		saw_nl;
+	char	c;
 
-	tmp = get_next_line(game->fd);
-	if (!tmp)
-		return (ERR);
-	game->width = ft_strlen(tmp);	
-	game->height = 0;
-	find_height(game);
+	bytes_read = 1;
+	saw_nl = 0;
+	while (bytes_read)
+	{
+		bytes_read = read(game->fd, &c, 1);
+		if (bytes_read == -1)
+			return (perror("so_long"), ERR);
+		if (c != '0' && c != '1' && c != 'C' && c != 'P' && c != 'E' && c != '\n')
+			return (ft_putstr_fd("Error\nmap contents invalid\n", STDERR), ERR);
+		if (c == '\n' && !saw_nl)
+		{
+			game->width = game->height;
+			saw_nl = 1;
+		}
+		game->height += bytes_read;
+	}
 	return (TRUE);
 }
 
-int	valid_file(t_game *game, char *file)
+int	valid_file(t_game *game)
 {
-	if (!ft_strnstr(file, ".ber", ft_strlen(file)))
-		return (ft_putstr_fd("so_long: argument is not .ber\n", STDERR), ERR);
-	if (ft_strlen(file) < 5)
-		return (ft_putstr_fd("so_long: argument is only .ber\n", STDERR), ERR);
-	game->fd = open(file, O_RDONLY);	
+	if (!ft_strnstr(game->file, ".ber", ft_strlen(game->file)))
+		return (parse_error(game, FILERR_1), ERR);
+	if (ft_strlen(game->file) < 5)
+		return (parse_error(game, FILERR_2), ERR);
+	game->fd = open(game->file, O_RDONLY);	
 	if (game->fd == -1)
-		return (perror("so_long"), ERR);
+		return (parse_error(game, PERR), ERR);
 	if (!find_map_size(game))
-		return (perror("so_long"), ERR);
-	return (TRUE);
+		return (close(game->fd), ERR);
+	return (close(game->fd), TRUE);
 }
 
 void	struct_init(t_game *game, char *file)
@@ -71,7 +87,10 @@ void	struct_init(t_game *game, char *file)
 	game->fd = -1;
 	game->file = file;
 	game->width = 0;
+	game->height = 0;
 	game->map = NULL;
+	game->mlx = NULL;
+	game->mlx_win = NULL;
 }
 
 int	main(int ac, char **av)
@@ -79,14 +98,12 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2)
-		return (ft_putstr_fd("so_long: invalid arguments\n", STDERR), ERR);
+		return (ft_putstr_fd("Error\nInvalid arguments\n", STDERR), ERR);
 	struct_init(&game, av[1]);
-	if (!valid_file(&game, av[1]))
-		return (close(game.fd), ERR);
+	if (!valid_file(&game))
+		return (ERR);
 	if (!valid_map(&game))		
 		return (close(game.fd), ERR);
-	ft_printf("Height is %d\n", game.height);
-	ft_printf("Width is %d\n", game.width);
 	game.mlx = mlx_init();
 	game.mlx_win = mlx_new_window(game.mlx, 300, 400, "so_long");
 }
