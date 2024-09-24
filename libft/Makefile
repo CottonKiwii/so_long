@@ -6,7 +6,7 @@
 #    By: CottonKiwii <julia.wolfram@gmx.at>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 18:21:08 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/23 15:26:28 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/24 16:53:15 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS_FILES := libft/ft_isalpha \
 			  libft/ft_atoi \
 			  libft/ft_calloc \
 			  libft/ft_strdup \
+			  libft/ft_strarrdup \
 			  libft/ft_substr \
 			  libft/ft_strjoin \
 			  libft/ft_strtrim \
@@ -70,6 +71,7 @@ SRCS_FILES := libft/ft_isalpha \
 			  libft/ft_lstclear_bonus \
 			  libft/ft_lstiter_bonus \
 			  libft/ft_lstmap_bonus \
+			  libft/ft_free_strarr \
 			  ft_printf/ft_printf \
 			  ft_printf/ft_print_char \
 			  ft_printf/ft_print_str \

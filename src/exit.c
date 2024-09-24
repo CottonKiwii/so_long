@@ -6,18 +6,22 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/24 15:55:58 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:56:38 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_exit(t_game *game, t_nbr status)
+void	ft_exit(t_game *game, int status)
 {
+	if (game->fd)
+		close(game->fd);
+	if (game->map)
+		ft_free_strarr(game->map);	
 	exit(status);
 }
 
-void	parse_error(t_game *game, t_err status)
+void	ft_panic(t_game *game, t_err status)
 {
 	ft_putstr_fd("Error\n", STDERR);
 	if (status == FILERR_1)

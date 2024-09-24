@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/24 15:52:26 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:41:34 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@
 # include <fcntl.h>
 # include <mlx.h>
 
-typedef enum e_nbr
-{
-	ERR,
-	TRUE
-}	t_nbr;
+# define ERR 0
+# define TRUE 1
 
 typedef enum e_err
 {
@@ -50,6 +47,7 @@ typedef struct s_game
 	char	**map;
 }	t_game;
 
-void	parse_error(t_game *game, t_err status);
+void	ft_panic(t_game *game, t_err status);
+void	ft_exit(t_game *game, int status);
 
 #endif
