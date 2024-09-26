@@ -1,0 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 12:25:09 by jwolfram          #+#    #+#             */
+/*   Updated: 2024/09/26 15:47:13 by jwolfram         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+int	map_init(t_game *game)
+{
+	char	*map;
+	int		bytes_read;
+
+	game->fd = open(game->file, O_RDONLY);	
+	if (game->fd == -1)
+		return (ft_panic(game, NULL), ERR);
+	map = (char *)ft_calloc(game->map.len + 1, sizeof(char));
+	if (!map)
+		return (ft_panic(game, NULL), ERR);
+	bytes_read = 1;
+	bytes_read = read(game->fd, map, game->map.len);
+	if (bytes_read == -1)
+		return (free(map), ft_panic(game, NULL), ERR);
+	game->map.content = ft_split(map, '\n');
+	if (!game->map.content)
+		return (free(map), ft_panic(game, NULL), ERR);
+	return (free(map), TRUE);
+}
+
+int	map_floodfill(t_game *game, char **cpy)
+{
+	int	i;
+
+	i = 0;
+	while (cpy[i])
+	{
+		if (cpy[i][0] != 1 || cpy[i][game->map.width] != 1)
+			return (ERR);
+		i++;
+	}
+	i = 0;
+	while (cpy[0])
+	{
+		if (cpy[0][i] != 1)
+	}
+}
+
+int	valid_map(t_game *game)
+{
+	int	i;
+	char	**cpy;
+
+	map_init(game);
+	for (i = 0; game->map.content[i]; i++)
+		ft_printf("%s\n", game->map.content[i]);
+	i = 0;
+	cpy = ft_strarrdup(game->map.content);
+	if (!cpy)
+		return (ft_panic(game, NULL), ERR);
+	for (i = 0; cpy[i]; i++)
+		ft_printf("%s\n", cpy[i]);
+	ft_free_strarr(cpy);
+	map_floodfill(game, cpy);
+	return (TRUE);
+}

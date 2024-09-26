@@ -6,13 +6,14 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/24 16:41:34 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:59:27 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+/* LIBRARIES */
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
@@ -21,33 +22,61 @@
 # include <fcntl.h>
 # include <mlx.h>
 
+/* MACROS */
 # define ERR 0
 # define TRUE 1
 
-typedef enum e_err
-{
-	PERR,
-	MAPERR,
-	FILERR_1,
-	FILERR_2
-}	t_err;
+# define ERR_SHORT "Argument too short\n"
+# define ERR_FILE "Argument is not .ber\n"
+# define ERR_MAP "Map contents invalid\n"
 
 # define STDIN	STDIN_FILENO
 # define STDOUT	STDOUT_FILENO
 # define STDERR	STDERR_FILENO
 
-typedef struct s_game
+/* STRUCTS */
+typedef struct s_check
 {
-	int		fd;
+	int	player;
+	int	exit;
+	int	collect;
+}	t_check;
+
+typedef struct s_map
+{
 	int		width;
 	int		height;
-	void	*mlx;
-	void	*mlx_win;
-	char	*file;
-	char	**map;
+	int		len;
+	char	**content;
+}	t_map;
+
+typedef struct s_player
+{
+	int	x;
+	int	y;
+}	t_player;
+
+typedef struct s_game
+{
+	int			fd;
+	char		*file;
+	t_map		map;
+	t_player	player;
+	t_check		check;
+	void		*mlx;
+	void		*mlx_win;
 }	t_game;
 
-void	ft_panic(t_game *game, t_err status);
+/* FUNCTIONS */
+void	valid_chars(t_game *game, char c);
+void	find_map_size(t_game *game);
+void	valid_file(t_game *game);
+void	struct_init(t_game *game, char *file);
+
+int		map_init(t_game *game);
+int		valid_map(t_game *game);
+
+void	ft_panic(t_game *game, char *error);
 void	ft_exit(t_game *game, int status);
 
 #endif
