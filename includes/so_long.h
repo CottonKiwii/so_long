@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/26 17:59:27 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:27:32 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	find_map_size(t_game *game);
 void	valid_file(t_game *game);
 void	struct_init(t_game *game, char *file);
 
-int		map_init(t_game *game);
-int		valid_map(t_game *game);
+void	map_init(t_game *game);
+void	valid_map(t_game *game);
 
 void	ft_panic(t_game *game, char *error);
 void	ft_exit(t_game *game, int status);

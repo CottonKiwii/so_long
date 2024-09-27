@@ -6,11 +6,32 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 13:36:03 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/26 18:56:01 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:26:37 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	map_init(t_game *game)
+{
+	char	*map;
+	int		bytes_read;
+
+	game->fd = open(game->file, O_RDONLY);	
+	if (game->fd == -1)
+		ft_panic(game, NULL);
+	map = (char *)ft_calloc(game->map.len + 1, sizeof(char));
+	if (!map)
+		ft_panic(game, NULL);
+	bytes_read = read(game->fd, map, game->map.len);
+	if (bytes_read == -1)
+		(free(map), ft_panic(game, NULL), ERR);
+	game->map.content = ft_split(map, '\n');
+	if (!game->map.content)
+		free(map), ft_panic(game, NULL);
+	game->map.height = ft_strarrlen(game->map.content);
+	free(map);
+}
 
 void	valid_chars(t_game *game, char c)
 {

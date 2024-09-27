@@ -6,32 +6,11 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:25:09 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/26 19:06:40 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:27:03 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	map_init(t_game *game)
-{
-	char	*map;
-	int		bytes_read;
-
-	game->fd = open(game->file, O_RDONLY);	
-	if (game->fd == -1)
-		return (ft_panic(game, NULL), ERR);
-	map = (char *)ft_calloc(game->map.len + 1, sizeof(char));
-	if (!map)
-		return (ft_panic(game, NULL), ERR);
-	bytes_read = read(game->fd, map, game->map.len);
-	if (bytes_read == -1)
-		return (free(map), ft_panic(game, NULL), ERR);
-	game->map.content = ft_split(map, '\n');
-	if (!game->map.content)
-		return (free(map), ft_panic(game, NULL), ERR);
-	game->map.height = ft_strarrlen(game->map.content);
-	return (free(map), TRUE);
-}
 
 void	map_floodfill(t_game *game, char **cpy, int x, int y)
 {
@@ -44,7 +23,7 @@ void	map_floodfill(t_game *game, char **cpy, int x, int y)
 	map_floodfill(game, cpy, x + 1, y);
 }
 
-int	find_player(t_game *game, char **cpy)
+void	find_player(t_game *game, char **cpy)
 {
 	int	x;
 	int	y;
@@ -57,7 +36,6 @@ int	find_player(t_game *game, char **cpy)
 		x++;
 	game->player.x = x;
 	game->player.y = y;
-	return (TRUE);
 }
 
 void	check_len(t_game *game)
@@ -99,17 +77,17 @@ void	check_border(t_game *game)
 	}
 }
 
-int	valid_map(t_game *game)
+void	valid_map(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	char	**cpy;
 
 	map_init(game);
 	check_border(game);
 	cpy = ft_strarrdup(game->map.content);
 	if (!cpy)
-		return (ft_panic(game, NULL), ERR);
+		ft_panic(game, NULL);
 	find_player(game, cpy);
 	map_floodfill(game, cpy, game->player.x, game->player.y);
 	y = 0;
@@ -118,12 +96,11 @@ int	valid_map(t_game *game)
 		x = 0;
 		while (cpy[y][x])
 		{
-			if (cpy[y][x] != '1' && cpy[y][x] != 'F')
-				ft_panic(game, ERR_MAP);
+			if (cpy[y][x] != '1' && cpy[y][x] != 'F' && cpy[y][x] != '0')
+				(ft_free_strarr(cpy), ft_panic(game, ERR_MAP));
 			x++;
 		}
 		y++;
 	}
 	ft_free_strarr(cpy);
-	return (TRUE);
 }
