@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 13:36:03 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/27 10:26:37 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:55:25 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ void	struct_init(t_game *game, char *file)
 	game->check.player = 0;
 	game->check.exit = 0;
 	game->check.collect = 0;
+	game->check.steps = 0;
 	game->player.x = 0;
 	game->player.y = 0;
+	game->tex.player = 0;
+	game->tex.collect = 0;
+	game->tex.border = 0;
+	game->tex.tile = 0;
+	game->tex.exit = 0;
 }

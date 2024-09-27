@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/27 10:29:22 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:09:03 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,37 @@
 
 /* MACROS */
 # define ERR 0
+# define FALSE 0
 # define TRUE 1
 
 # define ERR_SHORT "Argument too short\n"
 # define ERR_FILE "Argument is not .ber\n"
 # define ERR_MAP "Map contents invalid\n"
+# define ERR_BIG "Map size too big\n"
 
 # define STDIN	STDIN_FILENO
 # define STDOUT	STDOUT_FILENO
 # define STDERR	STDERR_FILENO
 
+# define MAX_SWIDTH	1920
+# define MAX_SHEIGTH 1080
 /* STRUCTS */
 typedef struct s_check
 {
 	int	player;
 	int	exit;
 	int	collect;
+	int	steps;
 }	t_check;
+
+typedef struct s_texture
+{
+	void	*border;
+	void	*player;
+	void	*tile;
+	void	*collect;
+	void	*exit;
+}	t_texture;
 
 typedef struct s_map
 {
@@ -63,6 +77,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_check		check;
+	t_texture	tex;
 	void		*mlx;
 	void		*mlx_win;
 }	t_game;
@@ -75,6 +90,21 @@ void	struct_init(t_game *game, char *file);
 
 void	map_init(t_game *game);
 void	valid_map(t_game *game);
+
+void	put_texture(t_game *game, char tile, int y, int x);
+void	print_map(t_game *game);
+void	tex_init(t_game *game);
+void	events_init(t_game *game);
+void	start_mlx(t_game *game);
+
+void	move_up(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	move_down(t_game *game);
+
+int		hook_idle(void *ptr);
+int		hook_close(t_game *game);
+int		hook_key(int key, t_game *game);
 
 void	ft_panic(t_game *game, char *error);
 void	ft_exit(t_game *game, int status);

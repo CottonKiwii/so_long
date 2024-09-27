@@ -6,7 +6,7 @@
 #    By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 10:25:24 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/26 13:43:15 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/27 14:51:47 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ SRCS_DIR := src
 SRCS := main \
 		init \
 		map \
+		game \
+		events \
+		move \
 		exit \
 
 OBJS_DIR := obj
