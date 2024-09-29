@@ -6,22 +6,11 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:25:09 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/27 10:27:03 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:04:01 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	map_floodfill(t_game *game, char **cpy, int x, int y)
-{
-	if (cpy[y][x] == '1' || cpy[y][x] == 'F')	
-		return ;
-	cpy[y][x] = 'F';
-	map_floodfill(game, cpy, x, y - 1);
-	map_floodfill(game, cpy, x, y + 1);
-	map_floodfill(game, cpy, x - 1, y);
-	map_floodfill(game, cpy, x + 1, y);
-}
 
 void	find_player(t_game *game, char **cpy)
 {
@@ -77,10 +66,31 @@ void	check_border(t_game *game)
 	}
 }
 
-void	valid_map(t_game *game)
+void	check_copy(t_game *game, char **cpy)
 {
 	int		x;
 	int		y;
+
+	y = 0;
+	while (cpy[y])	
+	{
+		x = 0;
+		while (cpy[y][x])
+		{
+			if (cpy[y][x] != '1' && cpy[y][x] != 'F' 
+				&& cpy[y][x] != '0' && cpy[y][x] != 'E')
+				(ft_free_strarr(cpy), ft_panic(game, ERR_MAP));
+			if (cpy[y][x] == 'E' && cpy[y - 1][x] != 'F' && cpy[y + 1][x] != 'F'
+				&& cpy[y][x - 1] != 'F' && cpy[y][x + 1] != 'F')
+				(ft_free_strarr(cpy), ft_panic(game, ERR_MAP));
+			x++;
+		}
+		y++;
+	}
+}
+
+void	valid_map(t_game *game)
+{
 	char	**cpy;
 
 	map_init(game);
@@ -90,17 +100,6 @@ void	valid_map(t_game *game)
 		ft_panic(game, NULL);
 	find_player(game, cpy);
 	map_floodfill(game, cpy, game->player.x, game->player.y);
-	y = 0;
-	while (cpy[y])	
-	{
-		x = 0;
-		while (cpy[y][x])
-		{
-			if (cpy[y][x] != '1' && cpy[y][x] != 'F' && cpy[y][x] != '0')
-				(ft_free_strarr(cpy), ft_panic(game, ERR_MAP));
-			x++;
-		}
-		y++;
-	}
+	check_copy(game, cpy);
 	ft_free_strarr(cpy);
 }

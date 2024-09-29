@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/27 15:09:03 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:04:27 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	struct_init(t_game *game, char *file);
 
 void	map_init(t_game *game);
 void	valid_map(t_game *game);
+void	map_floodfill(t_game *game, char **cpy, int x, int y);
 
 void	put_texture(t_game *game, char tile, int y, int x);
 void	print_map(t_game *game);
@@ -108,5 +109,7 @@ int		hook_key(int key, t_game *game);
 
 void	ft_panic(t_game *game, char *error);
 void	ft_exit(t_game *game, int status);
+void	ft_free_game(t_game *game);
+void	ft_win(t_game *game);
 
 #endif

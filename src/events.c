@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:23:21 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/27 14:57:54 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:26:01 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	hook_idle(void *ptr)
 
 int	hook_close(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->mlx_win);
+	ft_exit(game, 0);
 	return (0);
 }
 
 int	hook_key(int key, t_game *game)
 {
 	if (key == 65307)
-		mlx_destroy_window(game->mlx, game->mlx_win);
+		ft_exit(game, 0);
 	if (key == 'w' || key == 65362 || key == 'k')
 		move_up(game);
 	if (key == 'a' || key == 65361 || key == 'h')

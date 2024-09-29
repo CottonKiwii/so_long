@@ -6,7 +6,7 @@
 #    By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 10:25:24 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/27 14:51:47 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/29 12:04:41 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS := main \
 		map \
 		game \
 		events \
+		floodfill \
 		move \
 		exit \
 

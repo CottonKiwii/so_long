@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/23 10:46:53 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 11:31:56 by jwolfram         ###   ########.fr       */
+/*   Created: 2024/09/29 11:56:47 by jwolfram          #+#    #+#             */
+/*   Updated: 2024/09/29 11:57:01 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int ac, char **av)
+void	map_floodfill(t_game *game, char **cpy, int x, int y)
 {
-	t_game	game;
-
-	if (ac != 2)
-		return (ft_putstr_fd("Error\nInvalid arguments\n", STDERR), ERR);
-	struct_init(&game, av[1]);
-	valid_file(&game);
-	valid_map(&game);
-	start_mlx(&game);
-	mlx_loop(game.mlx);
-	ft_exit(&game, 0);
+	if (cpy[y][x] == '1' || cpy[y][x] == 'F' || cpy[y][x] == 'E')
+		return ;
+	cpy[y][x] = 'F';
+	map_floodfill(game, cpy, x, y - 1);
+	map_floodfill(game, cpy, x, y + 1);
+	map_floodfill(game, cpy, x - 1, y);
+	map_floodfill(game, cpy, x + 1, y);
 }
 
