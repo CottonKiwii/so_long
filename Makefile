@@ -6,14 +6,13 @@
 #    By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 10:25:24 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/29 12:04:41 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/29 12:57:14 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := so_long
 
-## REMOVE -G LATER
-CC := cc -g
+CC := cc
 
 MLXFLAGS := -lmlx -lXext -lX11 -lm
 
@@ -82,8 +81,4 @@ fclean: clean
 
 re: fclean all
 
-### REMOVE NORM LATER
-norm:
-	norminette ${SRCS_DIR}
-
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re
