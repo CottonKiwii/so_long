@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 12:04:27 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:47:46 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,18 @@
 # define ERR_MAP "Map contents invalid\n"
 # define ERR_BIG "Map size too big\n"
 
+# define TEX_CHAR "textures/Char_2x.xpm"
+# define TEX_COLL "textures/Milk_2x.xpm"
+# define TEX_WALL "textures/Water_2x.xpm"
+# define TEX_TILE "textures/Grass_2x.xpm"
+# define TEX_EXIT "textures/Door_2x.xpm"
+
 # define STDIN	STDIN_FILENO
 # define STDOUT	STDOUT_FILENO
 # define STDERR	STDERR_FILENO
 
-# define MAX_SWIDTH	1920
-# define MAX_SHEIGTH 1080
+# define MAX_W 1920
+# define MAX_H 1080
 /* STRUCTS */
 typedef struct s_check
 {

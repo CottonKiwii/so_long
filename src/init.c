@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 13:36:03 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 11:20:51 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:36:08 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	map_init(t_game *game)
 	char	*map;
 	int		bytes_read;
 
-	game->fd = open(game->file, O_RDONLY);	
+	game->fd = open(game->file, O_RDONLY);
 	if (game->fd == -1)
 		ft_panic(game, NULL);
 	map = (char *)ft_calloc(game->map.len + 1, sizeof(char));
@@ -28,7 +28,7 @@ void	map_init(t_game *game)
 		(free(map), ft_panic(game, NULL), ERR);
 	game->map.content = ft_split(map, '\n');
 	if (!game->map.content)
-		free(map), ft_panic(game, NULL);
+		(free(map), ft_panic(game, NULL));
 	game->map.height = ft_strarrlen(game->map.content);
 	free(map);
 }
@@ -58,7 +58,8 @@ void	find_map_size(t_game *game)
 		bytes_read = read(game->fd, &c, 1);
 		if (bytes_read == -1)
 			ft_panic(game, NULL);
-		if (c != '0' && c != '1' && c != 'C' && c != 'P' && c != 'E' && c != '\n')
+		if (c != '0' && c != '1' && c != 'C'
+			&& c != 'P' && c != 'E' && c != '\n')
 			ft_panic(game, ERR_MAP);
 		valid_chars(game, c);
 		if (c == '\n' && !saw_nl)
@@ -81,7 +82,7 @@ void	valid_file(t_game *game)
 	i = ft_strlen(game->file) - 4;
 	if (ft_strncmp(&game->file[i], ".ber", 4))
 		ft_panic(game, ERR_FILE);
-	game->fd = open(game->file, O_RDONLY);	
+	game->fd = open(game->file, O_RDONLY);
 	if (game->fd == -1)
 		ft_panic(game, NULL);
 	find_map_size(game);

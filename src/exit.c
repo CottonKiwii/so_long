@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:37:27 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 12:24:35 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:37:58 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_exit(t_game *game, int status)
 	if (game->fd != -1)
 		close(game->fd);
 	if (game->map.content)
-		ft_free_strarr(game->map.content);	
+		ft_free_strarr(game->map.content);
 	if (game->mlx)
 		ft_free_game(game);
 	exit(status);
@@ -57,5 +57,5 @@ void	ft_panic(t_game *game, char *error)
 		ft_putstr_fd(error, STDERR);
 	else
 		perror(NULL);
-	ft_exit(game, 1);	
+	ft_exit(game, 1);
 }

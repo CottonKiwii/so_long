@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:46:53 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 11:31:56 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:39:24 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ int	main(int ac, char **av)
 	mlx_loop(game.mlx);
 	ft_exit(&game, 0);
 }
-

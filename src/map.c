@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:25:09 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 12:04:01 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:38:56 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_border(t_game *game)
 	int	x;
 	int	y;
 	int	height;
-	int width;
+	int	width;
 
 	check_len(game);
 	y = 0;
@@ -56,9 +56,11 @@ void	check_border(t_game *game)
 		x = 0;
 		while (x < game->map.width)
 		{
-			if (game->map.content[0][x] != '1' || game->map.content[height - 1][x] != '1')
+			if (game->map.content[0][x] != '1'
+				|| game->map.content[height - 1][x] != '1')
 				ft_panic(game, ERR_MAP);
-			else if (game->map.content[y][0] != '1' || game->map.content[y][width - 1] != '1')
+			else if (game->map.content[y][0] != '1'
+				|| game->map.content[y][width - 1] != '1')
 				ft_panic(game, ERR_MAP);
 			x++;
 		}
@@ -72,12 +74,12 @@ void	check_copy(t_game *game, char **cpy)
 	int		y;
 
 	y = 0;
-	while (cpy[y])	
+	while (cpy[y])
 	{
 		x = 0;
 		while (cpy[y][x])
 		{
-			if (cpy[y][x] != '1' && cpy[y][x] != 'F' 
+			if (cpy[y][x] != '1' && cpy[y][x] != 'F'
 				&& cpy[y][x] != '0' && cpy[y][x] != 'E')
 				(ft_free_strarr(cpy), ft_panic(game, ERR_MAP));
 			if (cpy[y][x] == 'E' && cpy[y - 1][x] != 'F' && cpy[y + 1][x] != 'F'

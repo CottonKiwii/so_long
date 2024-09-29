@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:31:30 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/26 14:05:44 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:51:03 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_free_strarr(char **str)
 	i = 0;
 	while (str[i])
 	{
-		free(str[i]);	
+		free(str[i]);
 		i++;
 	}
 	free(str);

@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 11:56:47 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 11:57:01 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:36:17 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ void	map_floodfill(t_game *game, char **cpy, int x, int y)
 	map_floodfill(game, cpy, x - 1, y);
 	map_floodfill(game, cpy, x + 1, y);
 }
-
