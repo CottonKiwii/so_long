@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:41:39 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/30 09:31:03 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/30 09:35:03 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	process_move(t_game *game, int y, int x)
 		game->map.content[y][x] = 'P';
 		game->map.content[game->player.y][game->player.x] = '0';
 		game->check.steps++;
+		ft_printf("Steps: %d\n", game->check.steps);
 		ft_win(game);
 	}
 	if (game->map.content[y][x] == 'C')
@@ -39,7 +40,7 @@ void	move_up(t_game *game)
 	game->player.y--;
 	print_map(game);
 	game->check.steps++;
-	ft_printf("STEPS: %d\n", game->check.steps);
+	ft_printf("Steps: %d\n", game->check.steps);
 }
 
 void	move_left(t_game *game)
@@ -51,7 +52,7 @@ void	move_left(t_game *game)
 	game->player.x--;
 	print_map(game);
 	game->check.steps++;
-	ft_printf("STEPS: %d\n", game->check.steps);
+	ft_printf("Steps: %d\n", game->check.steps);
 }
 
 void	move_right(t_game *game)
@@ -63,7 +64,7 @@ void	move_right(t_game *game)
 	game->player.x++;
 	print_map(game);
 	game->check.steps++;
-	ft_printf("STEPS: %d\n", game->check.steps);
+	ft_printf("Steps: %d\n", game->check.steps);
 }
 
 void	move_down(t_game *game)
@@ -75,5 +76,5 @@ void	move_down(t_game *game)
 	game->player.y++;
 	print_map(game);
 	game->check.steps++;
-	ft_printf("STEPS: %d\n", game->check.steps);
+	ft_printf("Steps: %d\n", game->check.steps);
 }
