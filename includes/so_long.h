@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:48:20 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 12:47:46 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/30 09:39:01 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 
 # define MAX_W 1920
 # define MAX_H 1080
+
 /* STRUCTS */
 typedef struct s_check
 {
