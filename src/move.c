@@ -6,7 +6,7 @@
 /*   By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:41:39 by jwolfram          #+#    #+#             */
-/*   Updated: 2024/09/29 11:30:28 by jwolfram         ###   ########.fr       */
+/*   Updated: 2024/09/30 09:31:03 by jwolfram         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	process_move(t_game *game, int y, int x)
 	{
 		game->map.content[y][x] = 'P';
 		game->map.content[game->player.y][game->player.x] = '0';
+		game->check.steps++;
 		ft_win(game);
 	}
 	if (game->map.content[y][x] == 'C')
