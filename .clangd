@@ -1,0 +1,11 @@
+CompileFlags:
+  Add: [
+    -I../includes,
+    -I../../includes,
+    -I../../../includes,
+    -I../../../../includes,
+    -I../libft/includes,
+    -I../../libft/includes,
+    -I../../../libft/includes,
+    -I../../../../libft/includes,
+  ]

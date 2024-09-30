@@ -6,7 +6,7 @@
 #    By: jwolfram <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 10:25:24 by jwolfram          #+#    #+#              #
-#    Updated: 2024/09/29 12:04:41 by jwolfram         ###   ########.fr        #
+#    Updated: 2024/09/30 09:52:45 by jwolfram         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME := so_long
 ## REMOVE -G LATER
 CC := cc -g
 
-MLXFLAGS := -lmlx -lXext -lX11 -lm
+MLXFLAGS := -lmlx -lXext -lX11
 
 CFLAGS := -Wall -Wextra -Werror
 
